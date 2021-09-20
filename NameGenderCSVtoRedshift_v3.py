@@ -11,8 +11,8 @@ import psycopg2
 
 def get_Redshift_connection():
     host = "learnde.cduaw970ssvt.ap-northeast-2.redshift.amazonaws.com"
-    redshift_user = ""  # 본인 ID 사용
-    redshift_pass = ""  # 본인 Password 사용
+    redshift_user = "dkvowk"  # 본인 ID 사용
+    redshift_pass = "Dkvowk!1"  # 본인 Password 사용
     port = 5439
     dbname = "dev"
     conn = psycopg2.connect("dbname={dbname} user={user} host={host} password={password} port={port}".format(
@@ -75,6 +75,7 @@ dag_second_assignment = DAG(
 )
 
 
+# ETL을 3개의 task로
 extract = PythonOperator(
     task_id = 'extract',
     python_callable = extract,
@@ -96,7 +97,7 @@ load = PythonOperator(
     task_id = 'load',
     python_callable = load,
     params = {
-        'schema': 'raw_data',
+        'schema': 'dkvowk',
         'table': 'name_gender'
     },
     provide_context=True,

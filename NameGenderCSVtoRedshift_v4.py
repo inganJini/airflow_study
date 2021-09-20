@@ -12,7 +12,7 @@ import psycopg2
 
 
 def get_Redshift_connection():
-    hook = PostgresHook(postgres_conn_id='redshift_dev_db')
+    hook = PostgresHook(postgres_conn_id='redshift_dev_db')  # autocommit False 로 세팅됨!
     return hook.get_conn().cursor()
 
 
@@ -85,7 +85,7 @@ load = PythonOperator(
     task_id = 'load',
     python_callable = load,
     params = {
-        'schema': 'raw_data',   ## 자신의 스키마로 변경
+        'schema': 'dkvowk',   ## 자신의 스키마로 변경
         'table': 'name_gender'
     },
     provide_context=True,

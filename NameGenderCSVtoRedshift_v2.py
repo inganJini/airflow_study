@@ -12,8 +12,8 @@ import psycopg2
 
 def get_Redshift_connection():
     host = "learnde.cduaw970ssvt.ap-northeast-2.redshift.amazonaws.com"
-    redshift_user = ""  # 본인 ID 사용
-    redshift_pass = ""  # 본인 Password 사용
+    redshift_user = "dkvowk"  # 본인 ID 사용
+    redshift_pass = "Dkvowk!1"  # 본인 Password 사용
     port = 5439
     dbname = "dev"
     conn = psycopg2.connect("dbname={dbname} user={user} host={host} password={password} port={port}".format(
@@ -45,11 +45,11 @@ def transform(text):
 def load(lines):
     logging.info("load started")
     cur = get_Redshift_connection()
-    sql = "BEGIN;DELETE FROM raw_data.name_gender;"
+    sql = "BEGIN;DELETE FROM dkvowk.name_gender;"
     for l in lines:
         if l != '':
             (name, gender) = l.split(",")
-            sql += "INSERT INTO raw_data.name_gender VALUES ('{name}', '{gender}');".format(name=name, gender=gender)
+            sql += "INSERT INTO dkvowk.name_gender VALUES ('{name}', '{gender}');".format(name=name, gender=gender)
     sql += "END;"
     logging.info(sql)
     """
@@ -65,7 +65,7 @@ def etl(**context):
     # https://airflow.readthedocs.io/en/latest/_api/airflow/models/taskinstance/index.html#airflow.models.TaskInstance
     task_instance = context['task_instance']
     execution_date = context['execution_date']
-
+    logging.info(task_instance)
     logging.info(execution_date)
 
     data = extract(link)
@@ -89,8 +89,8 @@ dag_second_assignment = DAG(
 task = PythonOperator(
 	task_id = 'perform_etl',
 	python_callable = etl,
-        params = {
-            'url': "https://s3-geospatial.s3-us-west-2.amazonaws.com/name_gender.csv"
-        },
-        provide_context=True,
+    params = {
+        'url': "https://s3-geospatial.s3-us-west-2.amazonaws.com/name_gender.csv"
+    },
+    provide_context=True,
 	dag = dag_second_assignment)

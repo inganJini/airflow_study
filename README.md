@@ -5,7 +5,7 @@
 
 #### 1번 과제
 ##### 트렌젝션 구현하기
-
+NameGenderCSVtoRedshift.py
 PostgreSQL/psycopg2의 트랜잭션
 autocommit이라는 파라미터로 조절가능
 autocommit=True가 되면 기본적으로 PostgreSQL의 커밋 모드 사용
@@ -29,6 +29,7 @@ finally :
 ```
 
 ##### v1 개선
+NameGenderCSVtoRedshift_v2.py
 DAG Parameters 사용
 max_active_runs: # of DAGs instance
 concurrency: # of tasks that can run in parallel
@@ -39,3 +40,25 @@ DAG parameters vs. Task parameters의 차이점 이해가 중요
 default_args로 지정해주면 에러는 안 나지만 적용이 안됨
 default_args로 지정되는 파라미터들은 태스크 레벨로 적용되는 파라미터들
 
+
+##### v2 개선
+
+Xcom 객체를 사용해서 세 개의 task로 나누기
+Redshift의 스키마와 테이블 이름을 params로 넘기기
+
+
+##### v3 개선
+
+Variable를 이용해 CSV parameter 넘기기
+
+
+##### v4 개선
+
+Redshift Connection 사용하기
+Connection 사용하면 AutoCommit  False 로 설정됨!
+
+
+##### 커맨드라인에서 task 실행
+
+~$ airflow tasks test my_first_dag print_hello 2021-09-01
+test로 실행시 airflow DB에 저장되지 않음
