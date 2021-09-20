@@ -103,11 +103,11 @@ dag = DAG(
 etl = PythonOperator(
     task_id = 'etl',
     python_callable = etl,
-    # 서울의 위도/경도
+    # 시민공원의 위도/경도  35.164627, 129.054606
     params = {
-        "lat": 37.5665,
-        "lon": 126.9780,
-        "schema": "keeyong",
+        "lat": 35.164627,
+        "lon": 129.054606,
+        "schema": "dkvowk",
         "table": "weather_forecast"
     },
     provide_context=True,

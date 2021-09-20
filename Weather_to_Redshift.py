@@ -21,9 +21,9 @@ def get_Redshift_connection():
 
 def etl(**context):
     api_key = Variable.get("open_weather_api_key")
-    # 서울의 위도/경도
-    lat = 37.5665
-    lon = 126.9780
+    # 시민공원의 위도/경도 35.164627, 129.054606
+    lat = 35.164627
+    lon = 129.054606
 
     # https://openweathermap.org/api/one-call-api
     url = "https://api.openweathermap.org/data/2.5/onecall?lat=%s&lon=%s&appid=%s&units=metric" % (lat, lon, api_key)
@@ -39,7 +39,7 @@ def etl(**context):
         ret.append("('{}',{},{},{})".format(day, d["temp"]["day"], d["temp"]["min"], d["temp"]["max"]))
 
     cur = get_Redshift_connection()
-    insert_sql = """DELETE FROM keeyong.weather_forecast;INSERT INTO keeyong.weather_forecast VALUES """ + ",".join(ret)
+    insert_sql = """DELETE FROM dkvowk.weather_forecast;INSERT INTO dkvowk.weather_forecast VALUES """ + ",".join(ret)
     logging.info(insert_sql)
     try:
         cur.execute(insert_sql)
