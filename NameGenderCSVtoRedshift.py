@@ -8,8 +8,8 @@ import psycopg2
 
 def get_Redshift_connection():
     host = "learnde.cduaw970ssvt.ap-northeast-2.redshift.amazonaws.com"
-    redshift_user = ""  # 본인 ID 사용
-    redshift_pass = ""  # 본인 Password 사용
+    redshift_user = "dkvowk"  # 본인 redshift ID
+    redshift_pass = "Dkvowk!1"  # 본인 redshift Password
     port = 5439
     dbname = "dev"
     conn = psycopg2.connect("dbname={dbname} user={user} host={host} password={password} port={port}".format(
@@ -45,7 +45,7 @@ def load(lines):
     for l in lines:
         if l != '':
             (name, gender) = l.split(",")
-            sql += "INSERT INTO dkvowk.name_gender VALUES ('{name}', '{gender}');"
+            sql += f"INSERT INTO dkvowk.name_gender VALUES ('{name}', '{gender}');"
     sql += "END;"
     cur.execute(sql)
     logging.info(sql)
@@ -61,7 +61,7 @@ def etl():
 
 dag_second_assignment = DAG(
 	dag_id = 'second_assignment',
-  catchup = False,
+    catchup = False,
 	start_date = datetime(2021,9,3), # 날짜가 미래인 경우 실행이 안됨
 	schedule_interval = '0 2 * * *')  # 적당히 조절
 
