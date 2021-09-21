@@ -2,6 +2,9 @@
 # ->
 ## airflow study
 
+![Study Diagram drawio](https://user-images.githubusercontent.com/14247498/134169428-7b67ab73-888b-4cc5-9dac-fef403ad35f2.png)
+
+
 #### 트렌젝션 구현하기
 NameGenderCSVtoRedshift.py
 PostgreSQL/psycopg2의 트랜잭션
