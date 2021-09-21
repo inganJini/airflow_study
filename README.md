@@ -27,8 +27,9 @@ finally :
   conn.close()
 ```
 
-#### v1 개선
+#### v2 개선
 NameGenderCSVtoRedshift_v2.py
+
 DAG Parameters 사용
 max_active_runs: # of DAGs instance
 concurrency: # of tasks that can run in parallel
@@ -40,18 +41,16 @@ default_args로 지정해주면 에러는 안 나지만 적용이 안됨
 default_args로 지정되는 파라미터들은 태스크 레벨로 적용되는 파라미터들
 
 
-#### v2 개선
+#### v3 개선
+NameGenderCSVtoRedshift_v3.py
 
 Xcom 객체를 사용해서 세 개의 task로 나누기
 Redshift의 스키마와 테이블 이름을 params로 넘기기
-
-
-#### v3 개선
-
 Variable를 이용해 CSV parameter 넘기기
 
 
 #### v4 개선
+NameGenderCSVtoRedshift_v4.py
 
 Redshift Connection 사용하기
 Connection 사용하면 AutoCommit  False 로 설정됨!
@@ -65,7 +64,25 @@ test로 실행시 airflow DB에 저장되지 않음
 
 
 #### 날씨 api 이용
+Weather_to_Redshift.py, v2.py
+
 Open Weathermap api
 앞으로 7일의 날씨 정보 저장
 
 Incremental Update 방식으로 수정
+
+
+#### MySQL to Redshift
+MySQL_to_Redshift.py, v2.py, v3.py
+
+MySQL DAG를 execution_date을 사용하게 변경
+지금은 항상 모두 변경하게 되어 있지만 이를 execution_date을 사용해서 해당 하는 날만 읽어오게 변경
+이를 이용해서 backfill을 command line에서 실행해보기
+
+
+#### 
+
+
+#### Backfill 커맨드라인에서 실행
+airflow dags backfill ­-s 2018-­07-­01 ­-e 2018-­07-­31 dag_id
+(catchup True 세팅해야함)

@@ -44,7 +44,7 @@ def load(lines):
     sql = "BEGIN;DELETE FROM dkvowk.name_gender;"
     for l in lines:
         if l != '':
-            (name, gender) = l.split(",")
+            (name, gender) = tl.split(",")
             sql += f"INSERT INTO dkvowk.name_gender VALUES ('{name}', '{gender}');"
     sql += "END;"
     cur.execute(sql)
