@@ -2,7 +2,6 @@
 # ->
 ## airflow study
 
-
 #### 트렌젝션 구현하기
 NameGenderCSVtoRedshift.py
 PostgreSQL/psycopg2의 트랜잭션
