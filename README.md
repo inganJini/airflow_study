@@ -88,3 +88,12 @@ MySQL DAG를 execution_date을 사용하게 변경
 #### Backfill 커맨드라인에서 실행
 airflow dags backfill ­-s 2018-­07-­01 ­-e 2018-­07-­31 dag_id
 (catchup True 세팅해야함)
+
+
+
+##### Summary table
+Build_Summary.py 수정하여 일별 NPS를 계산하는 summary 테이블 생성
+
+NPS 란? (Net Promoter Score)
+* 10점 만점으로 '주변에 추천하겠는가?'라는 질문을 기반으로 고객 만족도를 계산
+* 10, 9점 추천하겠다는 고객(promoter)의 비율에서 0-6점의 불평고객(detractor)의 비율을 뺀 Data   (7,8 점은 계산되지 않음 )

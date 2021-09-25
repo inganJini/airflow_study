@@ -30,7 +30,7 @@ table = "nps"
 s3_bucket = "grepp-data-engineering"
 s3_key = schema + "-" + table
 
-mysql_to_s3_nps = MySQLToS3Operator(
+mysql_to_s3_nps = MySQLToS3Operator(   # 추가 설치 및 import한 모듈로 실행 (MySQLToS3Operator)
     task_id = 'mysql_to_s3_nps',
     query = "SELECT * FROM prod.nps",
     s3_bucket = s3_bucket,
@@ -41,7 +41,7 @@ mysql_to_s3_nps = MySQLToS3Operator(
     dag = dag
 )
 
-s3_to_redshift_nps = S3ToRedshiftOperator(
+s3_to_redshift_nps = S3ToRedshiftOperator(  # 추가 설치 및 import한 모듈로 실행 (S3ToRedshiftOperator)
     task_id = 's3_to_redshift_nps',
     s3_bucket = s3_bucket,
     s3_key = s3_key,
